@@ -6,18 +6,17 @@
 </template>
 
 <script>
-import Carousel from './components/carousel.vue'
+import Carousel from "./components/carousel.vue";
 export default {
-
   components: {
-    Carousel,
-}
-}
+    Carousel
+  }
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

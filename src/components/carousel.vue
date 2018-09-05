@@ -1,31 +1,33 @@
 <template>
- 
- <carousel :autoplay="true" :perPage="1">
+ <div>
+     <NbRequestChart/>
+ <carousel 
+ :autoplay="true" 
+ :perPage="1"
+ :autoplayTimeout="10000">
   <slide>
-    Slide 1 Content
+  
   </slide>
   <slide>
-    Slide 2 Content
   </slide>
     <slide>
-    Slide 3 Content
   </slide>
-</carousel>
 
+</carousel>
+ </div>
  
 </template>
 
 <script>
-import { Carousel, Slide } from 'vue-carousel'
-import NbRequestChart from './nbRequestChart.vue'
+import { Carousel, Slide } from "vue-carousel";
+import NbRequestChart from "./nbRequestChart.vue";
 export default {
- 
-   components: {
+  components: {
     NbRequestChart,
     Carousel,
     Slide
   }
-}
+};
 </script>
 
 <style>
