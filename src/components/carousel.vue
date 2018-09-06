@@ -1,16 +1,18 @@
 <template>
  <div>
-     <NbRequestChart/>
  <carousel 
- :autoplay="true" 
- :perPage="1"
- :autoplayTimeout="10000">
+
+ :autoplayLoop="true"
+ :autoplayTimeout="1000"
+ :perPage="1">
   <slide>
-  
+  <NbRequestChart/>
   </slide>
   <slide>
+    <TimeToInitChart/> 
   </slide>
     <slide>
+    <NbErrorChart/>
   </slide>
 
 </carousel>
@@ -21,9 +23,13 @@
 <script>
 import { Carousel, Slide } from "vue-carousel";
 import NbRequestChart from "./nbRequestChart.vue";
+import TimeToInitChart from "./timeToInitChart.vue";
+import NbErrorChart from "./nbErrorChart.vue";
 export default {
   components: {
     NbRequestChart,
+    TimeToInitChart,
+    NbErrorChart,
     Carousel,
     Slide
   }
