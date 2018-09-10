@@ -1,9 +1,10 @@
 <template>
  <div>
  <carousel 
-
- :autoplayLoop="true"
- :autoplayTimeout="1000"
+ :autoplay="true"
+ :slideSpeed="2000"
+ :autoplayTimeout="5000"
+ :minSwipeDistance="50"
  :perPage="1">
   <slide>
   <NbRequestChart/>

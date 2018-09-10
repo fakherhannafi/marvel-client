@@ -48,7 +48,7 @@ export default {
         title: {
           display: true,
           position: "top",
-          text: "PRISME Nombre Reféré par code de retour"
+          text: "PRISME Nombre d'Erreur Reféré par code de retour"
         },
         animation: {
           duration: 2000 // general animation time
