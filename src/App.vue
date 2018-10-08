@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-  <h1 style="font-family: cursive;text-align: center">Dashboard OOPRO</h1>
+  <h1 style="font-family: cursive;text-align: center">Marvel Super Heroes</h1>
   <Carousel/>
   </div>
 </template>

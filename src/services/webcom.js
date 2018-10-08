@@ -1,40 +1,43 @@
-let myRefPrismeNbRequest = new Webcom("");
-/* let myRefPrismeTimeToInit = new Webcom(
-  ""
-); */
+import config from "../../config.json";
+import Webcom from "webcom/webcom";
+import SuperHeroModel from "../model/SuperHeroModel";
+let myRef = new Webcom(config.webcom_endpoint);
 
 export default {
-  getNbRequestStaticMeasures() {
-    let res = [[], [], [], []];
-    let lastDate = myRefPrismeNbRequest.endAt().limit(1);
-    lastDate.on("child_added", function(snapshot) {
-      let staticMeasures = [
-        snapshot.val()["J-0"],
-        snapshot.val()["J-1"],
-        snapshot.val()["J-7"],
-        snapshot.val()["J-28"]
-      ];
-      for (let i = 0; i < 4; i++) {
-        for (let time in staticMeasures[i]) {
-          res[i].push({
-            x: new Date("2018-08-03T" + time),
-            y: Number(staticMeasures[i][time])
-          });
-        }
-      }
-    });
-    return res;
-  },
-
-  getNewNbRequest() {
-    let lastDate = myRefPrismeNbRequest.endAt().limit(1);
-    lastDate.on("child_changed", function(snapshot) {
-      let todaysValues = snapshot.val()["J-0"];
-      let LastValue = Object.values(todaysValues).slice(-1)[0];
-      let LastHour = Object.keys(todaysValues).slice(-1)[0];
-      this.datacollection[0].data.push({
-        x: new Date("2018-09-10T" + LastHour),
-        y: LastValue
+  getData() {
+    let collectionModels = [];
+    return new Promise(function(resolve) {
+      myRef.once("value", function(snapshot) {
+        let characters = snapshot.val();
+        characters.forEach(character => {
+          let comic1Title = "",
+            comic2Title = "",
+            comic3Title = "",
+            numComics = character.comics.returned;
+          if (numComics >= 1) {
+            comic1Title = character.comics.items["0"].name;
+            if (numComics >= 2) {
+              comic2Title = character.comics.items["1"].name;
+            }
+            if (numComics >= 3) {
+              comic3Title = character.comics.items["2"].name;
+            }
+          }
+          collectionModels.push(
+            new SuperHeroModel({
+              id: character.id,
+              name: character.name,
+              description: character.description,
+              imageUrl: character.thumbnail.path + config.image_size,
+              extension: character.thumbnail.extension,
+              numComics: numComics,
+              comic1Title: comic1Title,
+              comic2Title:comic2Title,
+              comic3Title:comic3Title
+            })
+          );
+        });
+        resolve(collectionModels);
       });
     });
   }

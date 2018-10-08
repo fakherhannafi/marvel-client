@@ -1,8 +1,9 @@
-# dashboard
+# Marvel APP Doc
 
 ## Project setup
 
 ```
+Install globally the package: npm install -g @vue/cli
 npm install
 ```
 
@@ -23,4 +24,13 @@ npm run build
 
 ```
 npm run lint
+```
+
+### Performance
+
+```
+Run in CLI : vue gui
+Go to http://localhost:8000 
+launch build 
+
 ```
