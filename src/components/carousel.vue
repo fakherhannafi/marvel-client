@@ -1,14 +1,10 @@
 <template>
  <div>
-
+<!-- <p>Asynchronous Property {{superHeroes}}</p> -->
 <carousel 
- :loop="true"
- :slideSpeed="4000"
- :autoplayTimeout="10000"
- :minSwipeDistance="50"
- :perPage="1">
-  <slide v-for="superHero in superHeroes" :key="superHero">
-    <div class="card">
+ :perPage="4">
+  <slide v-for="superHero in superHeroes" :key="superHero" >
+    <div class="card"  >
       <img v-bind:src="`${superHero.imageUrl}${superHero.extension}`"/>
       <h1><button type="button" class="btn">{{superHero.name}}</button> </h1> 
          <p class="title">Number of comics:</p>
@@ -19,6 +15,7 @@
       <p class="title">Description:</p> 
       <p class= "description" v-if="superHero.description ===''">No description found</p>
       <p class= "description" v-else> {{superHero.description}}</p>
+      
     </div>       
   </slide>
   </carousel>
@@ -37,13 +34,33 @@ export default {
   data: function() {
     return {
       superHeroes: null,
+      isProcessing: true
     };
   },
+  /* async mounted(){
+    this.superHeroes = await webcomData.getData();
+    console.log(this.superHeroes);
+  }, */
+
   mounted() {
-    webcomData.getData().then(collectionModels => {
-      this.superHeroes = collectionModels;
+    webcomData.getData().then(res => {
+      this.superHeroes = res;
+      console.log(this.superHeroes);
+      
+      //this.isProcessing = false;
     });
-  },
+  }
+
+  /*  asyncComputed: {
+    myResolvedValue() {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          isProcessing=false;
+          resolve(webcomData.getData());
+        }, 200);
+      });
+    }
+  } */
 };
 </script>
 
